@@ -1,6 +1,6 @@
 # NATS Messaging Project
 
-This project demonstrates how to send and receive messages using NATS, with separate Python scripts for sending messages and running a server that listens for messages.
+This project demonstrates how to send and receive messages using the NATS messaging system with separate Python scripts for sending messages and running a server that listens for messages. The project uses NKEY-based authentication to restrict permissions for different clients.
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ docker-compose build
 docker-compose up
 ```
 
-The NATS server and message listener server should now be running. The listener server will output the received messages to the console.
+The NATS server and message listener server should now be operational. The listener server will display the received messages on the console. The server user is granted permission to subscribe to messages, but is restricted from publishing messages.
 
 ## Sending Messages
 
@@ -43,7 +43,21 @@ pip install -r scripts/requirements.txt
 2. Run the `message.py` script with the message you want to send as a command-line argument.
 
 ```console
-python scripts/message.py "Hello, this is my message!"
+$ python3 scripts/message.py -h                          
+usage: message.py [-h] -s SUBJECT -m MESSAGE
+
+Send a message using NATS
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s SUBJECT, --subject SUBJECT
+                        Subject of the message
+  -m MESSAGE, --message MESSAGE
+                        Message to be sent
 ```
 
-The message will be sent to the NATS server, and the message listener server should display the received message in the console.
+```console
+python scripts/message.py -s nats.message -m "Hello, this is my message!"
+```
+
+The message will be sent to the NATS server, and the message listener server should display the received message in the console. The messaging user is granted permission to publish messages, but is restricted from subscribing to messages.

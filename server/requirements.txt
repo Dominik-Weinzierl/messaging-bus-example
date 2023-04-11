@@ -1,2 +1,4 @@
 nats.py==2.2.0
 python-dotenv==1.0.0
+nkeys==0.1.0
+ed25519==1.5
